@@ -14,7 +14,7 @@ func TestDec1A(t *testing.T) {
 		want int
 	}{
 		"simple":    {got: []int{1, 3, 4, 2, 5}, want: 3},
-		"from file": {got: fileToSlice("dec1a.txt"), want: 1759},
+		"from file": {got: fileToIntSlice("dec1a.txt"), want: 1759},
 	}
 
 	for name, tc := range tests {
@@ -42,7 +42,7 @@ func TestDec1B(t *testing.T) {
 			260,
 			263,
 		}, want: 5},
-		"from file": {got: fileToSlice("dec1a.txt"), want: 1805},
+		"from file": {got: fileToIntSlice("dec1a.txt"), want: 1805},
 	}
 
 	for name, tc := range tests {
@@ -53,7 +53,7 @@ func TestDec1B(t *testing.T) {
 	}
 }
 
-func fileToSlice(filename string) []int {
+func fileToIntSlice(filename string) []int {
 	file, err := os.Open(filename)
 	if err != nil {
 		log.Fatal(err)

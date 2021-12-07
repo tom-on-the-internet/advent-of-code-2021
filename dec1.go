@@ -23,15 +23,12 @@ func Dec1A(depths []int) int {
 func Dec1B(depths []int) int {
 	count := 0
 
-	for i := range depths {
+	for i, v := range depths {
 		if i < 3 {
 			continue
 		}
 
-		currentWindow := depths[i] + depths[i-1] + depths[i-2]
-		previousWindow := depths[i-1] + depths[i-2] + depths[i-3]
-
-		if currentWindow > previousWindow {
+		if v > depths[i-3] {
 			count++
 		}
 	}
