@@ -1,10 +1,6 @@
 package main
 
 import (
-	"bufio"
-	"log"
-	"os"
-	"strconv"
 	"testing"
 )
 
@@ -51,22 +47,4 @@ func TestDec1B(t *testing.T) {
 			t.Fatalf("%s: expected: %v, got: %v", name, tc.want, got)
 		}
 	}
-}
-
-func fileToIntSlice(filename string) []int {
-	file, err := os.Open(filename)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer file.Close()
-
-	numbers := []int{}
-
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		number, _ := strconv.Atoi(scanner.Text())
-		numbers = append(numbers, number)
-	}
-
-	return numbers
 }

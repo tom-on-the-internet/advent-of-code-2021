@@ -1,9 +1,6 @@
 package main
 
 import (
-	"bufio"
-	"log"
-	"os"
 	"testing"
 )
 
@@ -53,21 +50,4 @@ func TestDec2B(t *testing.T) {
 			t.Fatalf("%s: expected: %v, got: %v", name, tc.want, got)
 		}
 	}
-}
-
-func fileToStringSlice(filename string) []string {
-	file, err := os.Open(filename)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer file.Close()
-
-	strings := []string{}
-
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		strings = append(strings, scanner.Text())
-	}
-
-	return strings
 }
