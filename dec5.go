@@ -5,7 +5,7 @@ import (
 )
 
 type (
-	grid  [][]int
+	grid  map[point]int
 	point struct {
 		x int
 		y int
@@ -105,43 +105,28 @@ func getStraight(lines []line) []line {
 }
 
 func makeGrid(lines []line) grid {
-	maxX := 0
-	maxY := 0
+	g := grid{}
 
 	for _, line := range lines {
 		for _, point := range line.points() {
-			if point.x > maxX {
-				maxX = point.x
+			_, ok := g[point]
+			if !ok {
+				g[point] = 0
 			}
 
-			if point.y > maxY {
-				maxY = point.y
-			}
+			g[point]++
 		}
 	}
 
-	grid := make([][]int, maxY+1)
-	for i := range grid {
-		grid[i] = make([]int, maxX+1)
-	}
-
-	for _, line := range lines {
-		for _, point := range line.points() {
-			grid[point.y][point.x]++
-		}
-	}
-
-	return grid
+	return g
 }
 
 func countOverlaps(g grid) int {
 	count := 0
 
 	for _, v := range g {
-		for _, w := range v {
-			if w > 1 {
-				count++
-			}
+		if v > 1 {
+			count++
 		}
 	}
 

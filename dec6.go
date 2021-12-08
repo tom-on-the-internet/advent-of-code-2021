@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func Dec6A(input []int) int {
 	days := 80
 
@@ -32,26 +30,7 @@ func breed(input []int, days int) int {
 		counts[6] = counts[7] + newFish
 		counts[7] = counts[8]
 		counts[8] = newFish
-
 	}
 
 	return sliceSum(counts)
-}
-
-func oldbreed(input []int, days int) int {
-	for x := 1; x <= days; x++ {
-		fmt.Println(x)
-		for i, v := range input {
-			if v == 0 {
-				input[i] = 6
-				input = append(input, 8)
-
-				continue
-			}
-
-			input[i]--
-		}
-	}
-
-	return len(input)
 }
