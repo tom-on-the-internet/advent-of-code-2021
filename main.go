@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"strconv"
+	"strings"
 )
 
 func main() {
@@ -43,4 +44,40 @@ func fileToIntSlice(filename string) []int {
 	}
 
 	return numbers
+}
+
+func strToInt(s string) int {
+	x, _ := strconv.Atoi(s)
+
+	return x
+}
+
+func csvToInts(filename string) []int {
+	file, err := os.Open(filename)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+
+	numbers := []int{}
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		strNums := strings.Split(scanner.Text(), ",")
+
+		for _, v := range strNums {
+			numbers = append(numbers, strToInt(v))
+		}
+	}
+
+	return numbers
+}
+
+func sliceSum(nums []int) int {
+	sum := 0
+	for _, v := range nums {
+		sum += v
+	}
+
+	return sum
 }
