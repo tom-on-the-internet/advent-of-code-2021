@@ -21,14 +21,11 @@ func breed(input []int, days int) int {
 	for x := 1; x <= days; x++ {
 		newFish := counts[0]
 
-		counts[0] = counts[1]
-		counts[1] = counts[2]
-		counts[2] = counts[3]
-		counts[3] = counts[4]
-		counts[4] = counts[5]
-		counts[5] = counts[6]
-		counts[6] = counts[7] + newFish
-		counts[7] = counts[8]
+		for i := 0; i < len(counts)-1; i++ {
+			counts[i] = counts[i+1]
+		}
+
+		counts[6] += newFish
 		counts[8] = newFish
 	}
 
