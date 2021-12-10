@@ -1,9 +1,11 @@
 package main
 
 import (
-	"fmt"
 	"strings"
 )
+
+// THIS IS A BAD SOLUTION
+// PLEASE NEVER COPY THIS CODE
 
 type item struct {
 	signals []string
@@ -11,11 +13,8 @@ type item struct {
 }
 
 func (i item) number() int {
-	// I want to output the number
-	// Given a string, I need to know what number it is.
-	// This has to be done per item because the wiring changes.
-	// if I can pass in the correct wiring to a function, it can tell me the number.
-	// get the correct wiring.
+	numbers := ""
+
 	m := make(map[string]string)
 	m["a"] = i.a()
 	m["b"] = i.b()
@@ -25,9 +24,11 @@ func (i item) number() int {
 	m["f"] = i.f()
 	m["e"] = i.e()
 
-	fmt.Println(m)
+	for _, v := range i.output {
+		numbers += outputToStrNum(v, m)
+	}
 
-	return 0
+	return strToInt(numbers)
 }
 
 func (i item) a() string {
@@ -243,4 +244,45 @@ func toItems(input []string) []item {
 	}
 
 	return items
+}
+
+// start here
+func outputToStrNum(s string, m map[string]string) string {
+	if len(s) == 2 {
+		return "1"
+	}
+
+	if len(s) == 7 {
+		return "8"
+	}
+
+	if len(s) == 4 {
+		return "4"
+	}
+
+	if len(s) == 3 {
+		return "7"
+	}
+
+	if len(s) == 6 && !strings.Contains(s, m["d"]) {
+		return "0"
+	}
+
+	if len(s) == 6 && !strings.Contains(s, m["e"]) {
+		return "9"
+	}
+
+	if len(s) == 6 {
+		return "6"
+	}
+
+	if len(s) == 5 && strings.Contains(s, m["c"]) && strings.Contains(s, m["f"]) {
+		return "3"
+	}
+
+	if len(s) == 5 && strings.Contains(s, m["c"]) {
+		return "2"
+	}
+
+	return "5"
 }

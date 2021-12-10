@@ -47,7 +47,7 @@ func TestDec8B(t *testing.T) {
 			"egadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg | gbdfcae bgc cg cgb",
 			"gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce",
 		}, want: 61229},
-		// "from file": {got: fileToStringSlice("dec8.txt"), want: 530},
+		"from file": {got: fileToStringSlice("dec8.txt"), want: 1051087},
 	}
 
 	for name, tc := range tests {
