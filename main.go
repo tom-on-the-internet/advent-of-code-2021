@@ -8,6 +8,16 @@ import (
 	"strings"
 )
 
+type matrix [][]int
+
+func (m matrix) xlen() int {
+	return len(m[0])
+}
+
+func (m matrix) ylen() int {
+	return len(m)
+}
+
 func main() {
 }
 
@@ -80,4 +90,22 @@ func sliceSum(nums []int) int {
 	}
 
 	return sum
+}
+
+func toMatrix(input []string) matrix {
+	matrix := matrix{}
+
+	for _, v := range input {
+		split := strings.Split(v, "")
+		ints := []int{}
+
+		for _, w := range split {
+			i, _ := strconv.Atoi(w)
+			ints = append(ints, i)
+		}
+
+		matrix = append(matrix, ints)
+	}
+
+	return matrix
 }
